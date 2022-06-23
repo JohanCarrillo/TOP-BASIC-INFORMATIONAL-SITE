@@ -11,7 +11,6 @@ const server = http.createServer( (req, res) => {
 
 		// direction: '/', data: index.html
 		case '/':
-			console.log('inside index');
 			fs.readFile('./index.html', (err, data) => {
 				// the data is read as plain text
 				console.log('reading index');
@@ -19,9 +18,9 @@ const server = http.createServer( (req, res) => {
 
 				// now we add the server response
 				// response.statusCode = 200, means the url exists
-				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write(data);
-				return res.end;  // we have to end the response every time
+				return res.end();  // we have to end the response every time
 			});
 			break;
 
@@ -29,9 +28,9 @@ const server = http.createServer( (req, res) => {
 			fs.readFile('about.html', (err, data) => {
 				console.log('inside about me');
 				if (err) throw err;
-				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write(data);
-				return res.end;
+				return res.end();
 			});
 			break;
 		
@@ -39,9 +38,9 @@ const server = http.createServer( (req, res) => {
 			fs.readFile('contact.html', (err, data) => {
 				console.log('inside constat me');
 				if (err) throw err;
-				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.writeHead(200, {'Content-Type': 'text/html'});
 				res.write(data);
-				return res.end;
+				return res.end();
 			});
 			break;
 		
@@ -50,9 +49,9 @@ const server = http.createServer( (req, res) => {
 					console.log('inside 404');
 					if (err) throw err;
 					// response.statusCode = 200, means the url does not exists
-					res.writeHead(404, {'Content-Type': 'text/plain'});
+					res.writeHead(404, {'Content-Type': 'text/html'});
 					res.write(data);
-					return res.end;
+					return res.end();
 				});
 				break;
 	}
@@ -60,7 +59,7 @@ const server = http.createServer( (req, res) => {
 
 // now we make the server start listening in url:port
 server.listen(port, (err) => {
-	err ? console.log(err) : console.log('server working');
+	err ? console.log(err) : console.log('server working in port', port);
 });
 
 
